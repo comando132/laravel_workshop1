@@ -16,13 +16,9 @@
     @endauth
     {{$cars->links("pagination::bootstrap-5")}}
     <br />
-    <div class="container">
-        <div class="row">
-            @foreach($cars as $car)
-                <div class="col-4">
-                    <x-car-card :car="$car" />
-                </div>
-            @endforeach
-        </div>
+    <div class="card-columns">
+        @foreach($cars as $car)
+            <x-car-card :car="$car" />
+        @endforeach
     </div>
 @endsection

@@ -12,6 +12,15 @@ class CarsController extends Controller
             'title' => 'Cars',
             'cars' => Car::latest()->filter(request())->paginate(6)
         ]);
-
     }
+
+    public function create() {
+        return view('cars.car-create',[
+                'title' => 'Create a new car',
+            ]
+        );
+    }
+
+
+
 }

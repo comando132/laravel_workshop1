@@ -1,13 +1,9 @@
 @props(['car'])
-<div class="border rounded p-2">
-    <h2 class="mx-auto">{{ $car['name'] }}</h2>
-    <p>
-        Year: {{ $car['year'] }}
-    </p>
-    <p>
-        Model: {{ $car['model'] }}
-    </p>
-    <p>
-        Price: {{ $car['price'] }}
-    </p>
+<div class="card">
+        <div class="card-header text-center"><h3>{{ $car['name'] }}</h3></div>
+        <div class="card-body text-dark">
+            <h5 class="card-title">Model: {{ $car['model'] }}</h5>
+            <p class="card-text">Year: {{ $car['year'] }}</p>
+        </div>
+        <div class="card-footer bg-transparent">${{ number_format($car['price'], 2) }}</div>
 </div>
