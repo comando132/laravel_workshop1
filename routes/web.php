@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CarsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CarsController::class, 'index']);
+Route::get('/cars', [CarsController::class, 'index']);
+
+Route::get('/login', [UsersController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/authenticate', [UsersController::class, 'authenticate'])->middleware('guest');
+Route::post('/logout', [UsersController::class, 'logout'])->middleware('auth');

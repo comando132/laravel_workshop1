@@ -17,11 +17,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $pass = bcrypt('pass');
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt('hola123.'),
+            'password' => $pass,
             'remember_token' => Str::random(10),
         ];
     }

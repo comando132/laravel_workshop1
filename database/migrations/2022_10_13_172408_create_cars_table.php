@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('year')->nullable();
             $table->string('model');
-            $table->decimal('price', 11,2);
+            $table->decimal('price');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->timestamps();
