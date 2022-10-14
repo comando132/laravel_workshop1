@@ -20,12 +20,9 @@ class Car extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-    public function scopeFilter($query, Request $request) {
-        if ($request['year'] ?? false) {
-            $query->where('year', '=', $request['year'] );
-        }
-        if($request['price'] ?? false) {
-            $query->where('price', '=', $request['price'] );
+    public function scopeFilter($query, $request) {
+        if ($request['mycar'] ?? false) {
+            $query->where('user_id', '=', auth()->user()->id);
         }
     }
 }

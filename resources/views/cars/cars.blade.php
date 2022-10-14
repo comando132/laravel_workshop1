@@ -14,11 +14,18 @@
     <br />
     <br />
     @endauth
-    {{$cars->links("pagination::bootstrap-5")}}
+    {{ $cars->links("pagination::bootstrap-5") }}
     <br />
     <div class="card-columns">
         @foreach($cars as $car)
-            <x-car-card :car="$car" />
+            <x-car-card :car="$car" :edit="$edit"/>
         @endforeach
     </div>
+    @if($edit)
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-secondary" href="/cars"><span class="material-icons">keyboard_return</span> Return</a>
+            </div>
+        </div>
+    @endif
 @endsection
