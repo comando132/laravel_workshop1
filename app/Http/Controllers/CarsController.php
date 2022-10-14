@@ -55,7 +55,7 @@ class CarsController extends Controller
         ]);
         $formFields['user_id'] = auth()->id();
         Car::create($formFields);
-        return redirect('/cars')->with('message', 'Car saved successfully.');
+        return redirect('/cars/manage')->with('message', 'Car saved successfully.');
     }
 
     public function update(Request $request, Car $car) {

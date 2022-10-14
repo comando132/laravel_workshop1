@@ -26,9 +26,11 @@ Route::post('/cars', [CarsController::class, 'store'])->middleware('auth');
 Route::put('/cars/{car}', [CarsController::class, 'update'])->middleware('auth');
 Route::delete('/cars/{car}', [CarsController::class, 'destroy'])->middleware('auth');
 
-
 Route::get('/login', [UsersController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/register', [UsersController::class, 'create'])->middleware('guest');
 Route::post('/authenticate', [UsersController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [UsersController::class, 'logout'])->middleware('auth');
+Route::post('/users', [UsersController::class, 'store']);
+
 
 

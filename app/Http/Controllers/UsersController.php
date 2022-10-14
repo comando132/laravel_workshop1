@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -30,4 +32,22 @@ class UsersController extends Controller
         return redirect('/')->with('message', 'You have been Logged out!');
     }
 
+    public function create() {
+        return view('users.register', [
+            'title' => 'User Registration'
+        ]);
+    }
+
+    public function store(Request $request) {
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|confirmed|min:6'
+        ]);
+
+        $formFields['password'] = bcrypt($formFields['password']);
+        $user = User::create($formFields);
+        auth()->login($user);
+        return redirect('/cars')->with('message', 'User registered and Logged in!');
+    }
 }
