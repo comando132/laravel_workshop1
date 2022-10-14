@@ -21,7 +21,7 @@ cambiar en el .env los siguientes constantes:
 php artisan serve
 ```
 > Nota: En las migraciones se crean usuarios, marcas y carros por defecto 
-Contraseña de los usuarios : pass
+Contraseña de los usuarios : `pass`
 
 
 ## License
