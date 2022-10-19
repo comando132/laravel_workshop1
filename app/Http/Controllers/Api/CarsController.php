@@ -15,9 +15,9 @@ class CarsController extends Controller
         });
     }
 
-    public function show(Car $car) {
-        return Cache::remember("car.{ $car->id }", 7200, function () use($car) {
-            return $car;
+    public function show($car_id) {
+        return Cache::remember("car.{ $car_id }", 7200, function () use($car_id) {
+            return Car::find($car_id);
         });
 
     }

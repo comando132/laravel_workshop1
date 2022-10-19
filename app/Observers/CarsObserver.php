@@ -15,8 +15,7 @@ class CarsObserver
      */
     public function created(Car $car)
     {
-        Cache::forget('cars');
-        Cache::forget('car');
+        Cache::flush();
     }
 
     /**
@@ -27,8 +26,7 @@ class CarsObserver
      */
     public function updated(Car $car)
     {
-        Cache::forget('cars');
-        Cache::forget('car');
+        Cache::flush();
     }
 
     /**
