@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Car;
+use App\Observers\CarsObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Car::observe(classes: CarsObserver::class);
     }
 }

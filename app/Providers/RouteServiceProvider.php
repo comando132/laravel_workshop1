@@ -45,8 +45,26 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+
+        RateLimiter::for('cars_limiter', function (Request $request) {
+            return Limit::perMinute(10)->response(function() {
+                return response('Demasiados intentos de acceso.', 429);
+            });
         });
+
+        RateLimiter::for('car_limiter', function (Request $request) {
+            return Limit::perMinute(2)->response(function() {
+                return response('Has excedido el limite de acceso.', 429);
+            });
+        });
+
+        RateLimiter::for('brands_limiter', function (Request $request) {
+            return Limit::perHour(25)->response(function() {
+                return response('El limite de acceso se ha excedido.', 429);
+            });
+        });
+//        RateLimiter::for('api', function (Request $request) {
+//            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+//        });
     }
 }
