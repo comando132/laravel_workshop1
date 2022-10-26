@@ -47,13 +47,13 @@ class RouteServiceProvider extends ServiceProvider
     {
 
         RateLimiter::for('cars_limiter', function (Request $request) {
-            return Limit::perMinute(10)->response(function() {
+            return Limit::perMinute(100)->response(function() {
                 return response('Demasiados intentos de acceso.', 429);
             });
         });
 
         RateLimiter::for('car_limiter', function (Request $request) {
-            return Limit::perMinute(2)->response(function() {
+            return Limit::perMinute(200)->response(function() {
                 return response('Has excedido el limite de acceso.', 429);
             });
         });

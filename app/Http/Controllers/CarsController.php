@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BrandCarsEvent;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Notifications\SendRegistrationEmail;
 use Illuminate\Http\Request;
 
 class CarsController extends Controller
@@ -36,6 +38,9 @@ class CarsController extends Controller
         if ($car->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
+        dd(Car::countBrand());
+        event(new BrandCarsEvent($car));
+
         $brands = Brand::select('id', 'name')->get();
         return view('cars.car-edit',[
                 'title' => 'Car edition',
@@ -54,7 +59,9 @@ class CarsController extends Controller
             'year' => 'required|numeric|between:1900,2023',
         ]);
         $formFields['user_id'] = auth()->id();
-        Car::create($formFields);
+        $car = Car::create($formFields);
+        // notificacion de carro creado
+        $car->notify(new SendRegistrationEmail($car));
         return redirect('/cars/manage')->with('message', 'Car saved successfully.');
     }
 

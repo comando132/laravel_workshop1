@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/cars', [CarsController::class, 'index'])->middleware('throttle:cars_limiter');
-Route::get('/cars/{car_id}', [CarsController::class, 'show'])->middleware('throttle:car_limiter');
+Route::get('/car/{car_id}', [CarsController::class, 'show'])->middleware('throttle:car_limiter');
 Route::get('/brands', [BrandsController::class, 'index'])->middleware('throttle:brands_limiter');
